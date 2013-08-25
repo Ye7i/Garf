@@ -1,8 +1,8 @@
-garf: main.cpp Garf.o Channel.o
-	g++ main.cpp Garf.o Channel.o -o garf
+garf: main.cpp Garf.o Channel.o ChannelList.o
+	g++ main.cpp Garf.o Channel.o ChannelList.o -o garf
 
-Garf.o: Garf.cpp Garf.h ChannelList.o
-	g++ -c Garf.cpp ChannelList.o
+Garf.o: Garf.cpp Garf.h
+	g++ -c Garf.cpp
 	
 Channel.o: Channel.cpp Channel.h
 	g++ -c Channel.cpp
