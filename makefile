@@ -1,5 +1,8 @@
-main.o: main.cpp IrcBot.o
-	g++ main.cpp IrcBot.o -o ircbot
+main.o: main.cpp Garf.o Channel.o
+	g++ main.cpp Garf.o Channel.o -o ircbot
 
-IrcBot.o: IrcBot.cpp IrcBot.h
-	g++ -c IrcBot.cpp
+Garf.o: Garf.cpp Garf.h
+	g++ -c Garf.cpp
+	
+Channel.o: Channel.cpp Channel.h
+	g++ -c Channel.cpp
