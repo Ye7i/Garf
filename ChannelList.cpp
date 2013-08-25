@@ -17,12 +17,20 @@ void ChannelList::addChannel(const Channel& _channel)
 
 void ChannelList::removeChannel(const Channel& _channel)
 {
-	channels.erase(channels.begin() + getChannelIndex(_channel));
+	int index = getChannelIndex(_channel.getName());
+	if (index != -1)
+	{
+		channels.erase(channels.begin() + getChannelIndex(_channel));
+	}
 }
 
 void ChannelList::removeChannel(const std::string& _channelName)
 {
-	channels.erase(channels.begin() + getChannelIndex(_channelName));
+	int index = getChannelIndex(_channelName);
+	if (index != -1)
+	{
+		channels.erase(channels.begin() + getChannelIndex(_channelName));
+	}
 }
 
 bool ChannelList::channelExists(const std::string& _channelName) const
