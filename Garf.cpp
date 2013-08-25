@@ -121,34 +121,9 @@ void Garf::start()
 }
 
 
-bool Garf::charSearch(std::string toSearch, std::string searchFor)
+bool Garf::charSearch(std::string haystack, std::string needle)
 {
-	int len = toSearch.length();
-	int forLen = searchFor.length(); // The length of the searchfor field
-
-	//Search through each char in toSearch
-	for (int i = 0; i < len;i++)
-	{
-		//If the active char is equil to the first search item then search toSearch
-		if (searchFor[0] == toSearch[i])
-		{
-			bool found = true;
-			//search the char array for search field
-			for (int x = 1; x < forLen; x++)
-			{
-				if (toSearch[i+x]!=searchFor[x])
-				{
-					found = false;
-				}
-			}
-
-			//if found return true;
-			if (found == true)
-				return true;
-		}
-	}
-
-	return 0;
+	return (haystack.find(needle) != std::string::npos);
 }
 
 bool Garf::isConnected(std::string buf)
