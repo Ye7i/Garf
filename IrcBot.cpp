@@ -55,7 +55,7 @@ void IrcBot::start()
 
 	//Setup the structs if error print why
 	int res;
-	if ((res = getaddrinfo("irc.shadowfire.org",port.c_str(),&hints,&servinfo)) != 0)
+	if ((res = getaddrinfo("127.0.0.1",port.c_str(),&hints,&servinfo)) != 0)
 	{
 		setup = false;
 		fprintf(stderr,"getaddrinfo: %s\n", gai_strerror(res));
@@ -95,7 +95,7 @@ void IrcBot::start()
 				break;
 			case 4:
 					//Join a channel after we connect, this time we choose beaker
-					sendData("JOIN #upcos\r\n");
+					sendData("JOIN #test\r\n");
 			default:
 				break;
 		}
@@ -259,7 +259,7 @@ void IrcBot::msgHandel(std::string buf)
 {
 	if (charSearch(buf, "!" + nick))
 	{
-		sendData("PRIVMSG #upcos :Yes?\r\n");
+		sendData("PRIVMSG #test :Yes?\r\n");
 	}
 }
 
