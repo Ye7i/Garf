@@ -1,17 +1,18 @@
 #include <iostream>
-#include "Garf.h"
-
 #include <vector>
+
+#include "Garf.h"
 #include "Channel.h"
+#include "ChannelList.h"
 
 using namespace std;
 
 int main()
 {
-	std::vector<Channel> channels;
+	ChannelList list;
 	Channel chan("#test");
-	channels.push_back(chan);
-	Garf garf = Garf("garf","USER guest tolmoon tolsun :Ronnie Reagan\r\n", "127.0.0.1", "6667", channels);
+	list.addChannel(chan);
+	Garf garf = Garf("garf","USER guest tolmoon tolsun :Ronnie Reagan\r\n", "127.0.0.1", "6667", list);
 	garf.start();
 
 	return 0;

@@ -2,6 +2,7 @@
 #define GARF_H
 
 #include "Channel.h"
+#include "ChannelList.h"
 
 #include <string.h>
 #include <vector>
@@ -9,7 +10,7 @@
 class Garf
 {
 	public:
-		Garf(const std::string& _nick, const std::string& _usr, const std::string& _serverAddress, const std::string& _port, const std::vector<Channel>& _channels);
+		Garf(const std::string& _nick, const std::string& _usr, const std::string& _serverAddress, const std::string& _port, const ChannelList& _channelList);
 		
 		virtual ~Garf();
 
@@ -19,7 +20,7 @@ class Garf
 		
 		bool charSearch(std::string toSearch, std::string searchFor);
 
-		void joinChannel(Channel _channel);
+		void joinChannel(const Channel& _channel);
 
 	private:
 		int socketDescriptor;
@@ -28,7 +29,7 @@ class Garf
 		std::string usr;
 		std::string port;
 		std::string serverAddress;
-		std::vector<Channel> channels;
+		ChannelList channelList;
 		
 		unsigned int maxBufferSize;
 

@@ -8,7 +8,8 @@ using namespace std;
 class Channel
 {
 	public:
-		Channel(std::string _name);
+		Channel(const std::string& _name);
+		virtual ~Channel();
 		
 		std::string getName() const;
 	private:

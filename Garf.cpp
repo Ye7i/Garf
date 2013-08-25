@@ -14,13 +14,13 @@
 #include <signal.h>
 #include <time.h>
 
-Garf::Garf(const std::string& _nick, const std::string& _usr, const std::string& _serverAddress, const std::string& _port, const std::vector<Channel>& _channels)
+Garf::Garf(const std::string& _nick, const std::string& _usr, const std::string& _serverAddress, const std::string& _port, const ChannelList& _channelList)
 {
 	nick = _nick;
 	usr = _usr;
 	port = _port;
 	serverAddress = _serverAddress;
-	channels = _channels;
+	channelList = _channelList;
 }
 
 Garf::~Garf()
@@ -82,9 +82,9 @@ void Garf::start()
 					sendData(usr);
 				break;
 			case 4:
-					for (int i = 0; i < channels.size(); ++i)
+					for (int i = 0; i < channelList.size(); ++i)
 					{
-						joinChannel(channels[i]);
+						joinChannel(channelList.getChannel(i));
 					}
 			default:
 				break;
@@ -253,7 +253,7 @@ void Garf::msgHandel(std::string buf)
 	}
 }
 
-void Garf::joinChannel(Channel _channel)
+void Garf::joinChannel(const Channel& _channel)
 {
 	sendData("JOIN " + _channel.getName() + "\r\n");
 }
