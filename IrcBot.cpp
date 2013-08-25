@@ -7,6 +7,7 @@
 
 #include "IrcBot.h"
 #include <iostream>
+#include <algorithm>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -131,34 +132,9 @@ void IrcBot::start()
 }
 
 
-bool IrcBot::charSearch(std::string toSearch, std::string searchFor)
+bool IrcBot::charSearch(std::string haystack, std::string needle)
 {
-	int len = strlen(toSearch.c_str());
-	int forLen = strlen(searchFor.c_str()); // The length of the searchfor field
-
-	//Search through each char in toSearch
-	for (int i = 0; i < len;i++)
-	{
-		//If the active char is equil to the first search item then search toSearch
-		if (searchFor[0] == toSearch[i])
-		{
-			bool found = true;
-			//search the char array for search field
-			for (int x = 1; x < forLen; x++)
-			{
-				if (toSearch[i+x]!=searchFor[x])
-				{
-					found = false;
-				}
-			}
-
-			//if found return true;
-			if (found == true)
-				return true;
-		}
-	}
-
-	return 0;
+	return (haystack.find(needle) != std::string::npos);
 }
 
 bool IrcBot::isConnected(std::string buf)
@@ -262,4 +238,3 @@ void IrcBot::msgHandel(std::string buf)
 		sendData("PRIVMSG #test :Yes?\r\n");
 	}
 }
-
