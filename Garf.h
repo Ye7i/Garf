@@ -3,6 +3,8 @@
 
 #include "Channel.h"
 #include "ChannelList.h"
+#include "Server.h"
+#include "User.h"
 
 #include <string.h>
 #include <vector>
@@ -10,7 +12,7 @@
 class Garf
 {
 	public:
-		Garf(const std::string& _nick, const std::string& _usr, const std::string& _serverAddress, const std::string& _port, const ChannelList& _channelList);
+		Garf(const User& _user, const Server& _server, const ChannelList& _channelList);
 		
 		virtual ~Garf();
 
@@ -25,10 +27,8 @@ class Garf
 	private:
 		int socketDescriptor;
 
-		std::string nick;
-		std::string usr;
-		std::string port;
-		std::string serverAddress;
+		User user;
+		Server server;
 		ChannelList channelList;
 		
 		unsigned int maxBufferSize;

@@ -14,13 +14,14 @@
 #include <signal.h>
 #include <time.h>
 
-Garf::Garf(const std::string& _nick, const std::string& _usr, const std::string& _serverAddress, const std::string& _port, const ChannelList& _channelList)
+Garf::Garf(const User& _user, const Server& _server, const ChannelList& _channelList)
 {
-	nick = _nick;
-	usr = _usr;
-	port = _port;
-	serverAddress = _serverAddress;
+	user = _user;
+	server = _server;
 	channelList = _channelList;
+	cout << server.getAddr() << endl << server.getPort() << endl;
+	cout << user.getNick() << endl << user.getUsr() << endl;
+	maxBufferSize = 100;
 }
 
 Garf::~Garf()
@@ -44,7 +45,7 @@ void Garf::start()
 
 	//Setup the structs if error print why
 	int res;
-	if ((res = getaddrinfo(serverAddress.c_str(), port.c_str(), &hints, &servinfo)) != 0)
+	if ((res = getaddrinfo(server.getAddr().c_str(), server.getPort().c_str(), &hints, &servinfo)) != 0)
 	{
 		setup = false;
 		fprintf(stderr,"getaddrinfo: %s\n", gai_strerror(res));
@@ -78,8 +79,8 @@ void Garf::start()
 		switch (count) {
 			case 3:
 					//after 3 recives send data to server (as per IRC protacol)
-					sendData("NICK " + nick + "\r\n");
-					sendData(usr);
+					sendData("NICK " + user.getNick() + "\r\n");
+					sendData(user.getUsr());
 				break;
 			case 4:
 					for (int i = 0; i < channelList.size(); ++i)
@@ -222,7 +223,7 @@ void Garf::sendPong(std::string buf)
 
 void Garf::msgHandel(std::string buf)
 {
-	if (charSearch(buf, "!" + nick))
+	if (charSearch(buf, "!" + user.getNick()))
 	{
 		sendData("PRIVMSG #test :Yes?\r\n");
 	}
