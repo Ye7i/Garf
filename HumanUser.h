@@ -5,7 +5,7 @@
 
 #include <string>
 
-class HumanUser : User
+class HumanUser : public User
 {
 	public:
 		HumanUser();

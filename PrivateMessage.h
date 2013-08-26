@@ -3,7 +3,7 @@
 
 #include "Message.h"
 
-class PrivateMessage : Message
+class PrivateMessage : public Message
 {
 	public:
 		PrivateMessage(const std::string& _data);
