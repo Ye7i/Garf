@@ -1,4 +1,0 @@
-Garf
-====
-
-Garf IRC bot
