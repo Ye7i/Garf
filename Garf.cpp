@@ -76,6 +76,7 @@ void Garf::start()
 		switch (count) {
 			case 3:
 					//after 3 recives send data to server (as per IRC protacol)
+					cout << user.getNick() << endl;
 					sendData("NICK " + user.getNick() + "\r\n");
 					sendData(user.getUsr());
 				break;
