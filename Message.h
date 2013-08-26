@@ -1,32 +1,33 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
+#include "User.h"
+
 #include <string>
 
 namespace MessageType
 {
 	enum Value
 	{
-		PRIVMSG
+		PRIVATE,
+		CHANNEL,
+		SERVER
 	};
 }
 
 class Message
 {
 	public:
-		Message();
-		Message(const std::string& _data);
+		Message(const MessageType::Value& _type, const std::string& _data);
 		virtual ~Message();
-		
-		void setType(const MessageType::Value& _type);
-		
+
 		const MessageType::Value& getType() const;
 		
 		bool compareType(const MessageType::Value& _type);
 	private:
 		MessageType::Value type;
 		std::string rawContent;
-		std::string source;
+		User originator;
 };
 
 #endif

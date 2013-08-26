@@ -5,7 +5,7 @@
 #include "Channel.h"
 #include "ChannelList.h"
 #include "Server.h"
-#include "User.h"
+#include "HumanUser.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ int main()
 	list.addChannel(chan2);
 	
 	Server server("127.0.0.1", "6667", 100);
-	User user("garf", "USER guest tolmoon tolsun :Ronnie Reagan\r\n");
+	HumanUser user("garf", "USER guest tolmoon tolsun :Ronnie Reagan\r\n");
 	
 	Garf garf = Garf(user, server, list);
 	garf.start();

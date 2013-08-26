@@ -1,5 +1,5 @@
-garf: main.cpp Garf.o Channel.o ChannelList.o Server.o User.o Message.o
-	g++ main.cpp Garf.o Channel.o ChannelList.o Server.o User.o Message.o -o garf
+garf: main.cpp Garf.o Channel.o ChannelList.o Server.o User.o Message.o PrivateMessage.o HumanUser.o
+	g++ main.cpp Garf.o Channel.o ChannelList.o Server.o User.o Message.o PrivateMessage.o HumanUser.o -o garf
 
 Garf.o: Garf.cpp Garf.h
 	g++ -c Garf.cpp
@@ -18,6 +18,12 @@ User.o: User.cpp User.h
 
 Message.o: Message.cpp Message.h
 	g++ -c Message.cpp
+
+PrivateMessage.o: PrivateMessage.h PrivateMessage.cpp
+	g++ -c PrivateMessage.cpp
+	
+HumanUser.o: HumanUser.cpp HumanUser.h
+	g++ -c HumanUser.cpp
 
 clean:
 	rm -rf *.o garf

@@ -14,7 +14,7 @@
 #include <signal.h>
 #include <time.h>
 
-Garf::Garf(const User& _user, const Server& _server, const ChannelList& _channelList)
+Garf::Garf(const HumanUser& _user, const Server& _server, const ChannelList& _channelList)
 {
 	user = _user;
 	server = _server;

@@ -4,7 +4,7 @@
 #include "Channel.h"
 #include "ChannelList.h"
 #include "Server.h"
-#include "User.h"
+#include "HumanUser.h"
 
 #include <string.h>
 #include <vector>
@@ -12,7 +12,7 @@
 class Garf
 {
 	public:
-		Garf(const User& _user, const Server& _server, const ChannelList& _channelList);
+		Garf(const HumanUser& _user, const Server& _server, const ChannelList& _channelList);
 		
 		virtual ~Garf();
 
@@ -25,7 +25,7 @@ class Garf
 	private:
 		int socketDescriptor;
 
-		User user;
+		HumanUser user;
 		Server server;
 		ChannelList channelList;
 

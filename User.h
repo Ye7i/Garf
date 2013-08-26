@@ -16,20 +16,18 @@ class User
 {
 	public:
 		User();
-		User(const std::string& _nick, const std::string& _usr, const std::string& hostname = "");
+		User(const UserType::Value& _type, const std::string& _hostname = "");
 		virtual ~User();
-		
-		void setNick(const std::string& _nick);
-		void setUsr(const std::string& _usr);
+
 		void setHostname(const std::string& _hostname);
-		
-		const std::string& getNick() const;
-		const std::string& getUsr() const;
+
 		const std::string& getHostname() const;
+		const UserType::Value& getType() const;
+		
+		bool compareType(const UserType::Value& _type);
 	private:
-		std::string nick;
-		std::string usr;
 		std::string hostname;
+		UserType::Value type;
 };
 
 #endif
