@@ -19,9 +19,6 @@ Garf::Garf(const User& _user, const Server& _server, const ChannelList& _channel
 	user = _user;
 	server = _server;
 	channelList = _channelList;
-	cout << server.getAddr() << endl << server.getPort() << endl;
-	cout << user.getNick() << endl << user.getUsr() << endl;
-	maxBufferSize = 100;
 }
 
 Garf::~Garf()
@@ -68,7 +65,7 @@ void Garf::start()
 
 	//Recv some data
 	int numbytes;
-	char buf[maxBufferSize];
+	char buf[server.getMaxBufSize()];
 
 	int count = 0;
 	while (1)
@@ -92,7 +89,7 @@ void Garf::start()
 		}
 
 		//Recv & print Data
-		numbytes = recv(socketDescriptor,buf,maxBufferSize-1,0);
+		numbytes = recv(socketDescriptor,buf,server.getMaxBufSize()-1,0);
 		buf[numbytes]='\0';
 		std::cout << buf;
 		//buf is the data that is recived
@@ -122,14 +119,13 @@ void Garf::start()
 }
 
 
-bool Garf::charSearch(std::string haystack, std::string needle)
+bool Garf::charSearch(const std::string& haystack, const std::string& needle)
 {
 	return (haystack.find(needle) != std::string::npos);
 }
 
 bool Garf::isConnected(std::string buf)
-{//returns true if "/MOTD" is found in the input strin
-	//If we find /MOTD then its ok join a channel
+{
 	if (charSearch(buf,"/MOTD") == true)
 		return true;
 	else
@@ -137,19 +133,18 @@ bool Garf::isConnected(std::string buf)
 }
 
 std::string Garf::timeNow()
-{//returns the current date and time
+{
 	time_t rawtime;
 	struct tm * timeinfo;
 
-	time ( &rawtime );
-	timeinfo = localtime ( &rawtime );
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
 
-	return asctime (timeinfo);
+	return asctime(timeinfo);
 }
 
-bool Garf::sendData(std::string msg)
-{//Send some data
-	//Send some data
+bool Garf::sendData(const std::string& msg)
+{
 	int len = msg.length();
 	int bytes_sent = send(socketDescriptor,msg.c_str(),len,0);
 
@@ -159,7 +154,7 @@ bool Garf::sendData(std::string msg)
 		return true;
 }
 
-void Garf::sendPong(std::string buf)
+void Garf::sendPong(const std::string& buf)
 {
 	//Get the reply address
 	//loop through bug and find the location of PING
@@ -221,11 +216,11 @@ void Garf::sendPong(std::string buf)
 	}
 }
 
-void Garf::msgHandel(std::string buf)
+void Garf::msgHandel(const std::string& buf)
 {
 	if (charSearch(buf, "!" + user.getNick()))
 	{
-		sendData("PRIVMSG #test :Yes?\r\n");
+		sendData("PRIVMSG #test :!garf\r\n");
 	}
 }
 

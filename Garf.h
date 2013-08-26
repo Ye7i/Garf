@@ -19,8 +19,6 @@ class Garf
 		bool setup;
 
 		void start();
-		
-		bool charSearch(std::string toSearch, std::string searchFor);
 
 		void joinChannel(const Channel& _channel);
 
@@ -30,18 +28,18 @@ class Garf
 		User user;
 		Server server;
 		ChannelList channelList;
-		
-		unsigned int maxBufferSize;
 
 		bool isConnected(std::string buf);
 
 		std::string timeNow();
 
-		bool sendData(std::string msg);
+		bool sendData(const std::string& msg);
 
-		void sendPong(std::string buf);
+		void sendPong(const std::string& buf);
 
-		void msgHandel(std::string buf);
+		void msgHandel(const std::string& buf);
+		
+		bool charSearch(const std::string& toSearch, const std::string& searchFor);
 };
 
 #endif

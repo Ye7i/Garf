@@ -26,6 +26,11 @@ void User::setUsr(const std::string& _usr)
 	usr = _usr;
 }
 
+void User::setHostname(const std::string& _hostname)
+{
+	hostname = _hostname;
+}
+
 const std::string& User::getNick() const
 {
 	return nick;
@@ -34,4 +39,9 @@ const std::string& User::getNick() const
 const std::string& User::getUsr() const
 {
 	return usr;
+}
+
+const std::string& User::getHostname() const
+{
+	return hostname;
 }
