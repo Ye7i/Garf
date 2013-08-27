@@ -12,7 +12,12 @@ ChannelList::~ChannelList()
 
 void ChannelList::addChannel(const Channel& _channel)
 {
-	channels.push_back(_channel);
+	// Prevent adding duplicate channels.
+	// There's no use for that, really. We're using the same nickname for each instance.
+	if (!channelExists(_channel))
+	{
+		channels.push_back(_channel);
+	}
 }
 
 void ChannelList::removeChannel(const Channel& _channel)

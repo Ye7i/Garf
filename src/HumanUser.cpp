@@ -4,10 +4,8 @@ HumanUser::HumanUser()
 {
 }
 
-HumanUser::HumanUser(const std::string& _nick, const std::string& _usr, const std::string& _hostname) : User(UserType::HUMAN, _hostname)
+HumanUser::HumanUser(const std::string& _nick, const std::string& _usr, const std::string& _hostname) : User(UserType::HUMAN, _hostname), nick(_nick), usr(_usr)
 {
-	nick = _nick;
-	usr = _usr;
 }
 
 HumanUser::~HumanUser()

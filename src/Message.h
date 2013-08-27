@@ -15,10 +15,21 @@ namespace MessageType
 	};
 }
 
+namespace MessageCommand
+{
+	enum Value
+	{
+		PRIVMSG,
+		JOIN,
+		QUIT,
+		PING
+	};
+}
+
 class Message
 {
 	public:
-		Message(const MessageType::Value& _type, const std::string& _data);
+		Message(const MessageType::Value& _type, const MessageCommand::Value& _command, const std::string& _data);
 		virtual ~Message();
 
 		const MessageType::Value& getType() const;
@@ -28,6 +39,7 @@ class Message
 		MessageType::Value type;
 		std::string rawContent;
 		User originator;
+		MessageCommand::Value command;
 };
 
 #endif

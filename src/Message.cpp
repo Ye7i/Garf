@@ -1,9 +1,7 @@
 #include "Message.h"
 
-Message::Message(const MessageType::Value& _type, const std::string& _data)
+Message::Message(const MessageType::Value& _type, const MessageCommand::Value& _command, const std::string& _data) : type(_type), rawContent(_data), command(_command)
 {
-	type = _type;
-	rawContent = _data;
 }
 
 Message::~Message()

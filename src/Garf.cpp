@@ -163,7 +163,7 @@ void Garf::sendPong(const std::string& buf)
 
 	std::string toSearch = "PING ";
 
-	for (int i = 0; i < buf.length(); ++i)
+	for (unsigned int i = 0; i < buf.length(); ++i)
 	{
 		//If the active char is equil to the first search item then search toSearch
 		if (buf[i] == toSearch[0])
@@ -183,7 +183,7 @@ void Garf::sendPong(const std::string& buf)
 			{
 				int count = 0;
 				//Count the chars
-				for (int x = (i+toSearch.length()); x < buf.length(); ++x)
+				for (unsigned int x = (i+toSearch.length()); x < buf.length(); ++x)
 				{
 					count++;
 				}
@@ -199,7 +199,7 @@ void Garf::sendPong(const std::string& buf)
 
 				count = 0;
 				//set the hostname data
-				for (int x = (i+toSearch.length()); x < buf.length(); ++x)
+				for (unsigned int x = (i+toSearch.length()); x < buf.length(); ++x)
 				{
 					returnHost[count+5]=buf[x];
 					count++;
