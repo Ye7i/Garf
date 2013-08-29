@@ -1,5 +1,5 @@
-garf: src/main.cpp Garf.o Channel.o ChannelList.o Server.o User.o Message.o MessageParser.o PingMessage.o QuitMessage.o JoinMessage.o HumanUser.o ServerUser.o ServerMessage.o PrivateMessage.o
-	g++ -Wall src/main.cpp bin/Garf.o bin/Channel.o bin/ChannelList.o bin/Server.o bin/User.o bin/Message.o bin/MessageParser.o bin/PingMessage.o bin/QuitMessage.o bin/JoinMessage.o bin/HumanUser.o bin/ServerUser.o bin/ServerMessage.o bin/PrivateMessage.o -o bin/garf
+garf: src/main.cpp Garf.o Channel.o ChannelList.o Server.o User.o Message.o MessageParser.o PingMessage.o QuitMessage.o JoinMessage.o HumanUser.o ServerUser.o ServerMessage.o PrivateMessage.o HumanMessage.o Command.o CommandHello.o
+	g++ -Wall src/main.cpp bin/Garf.o bin/Channel.o bin/ChannelList.o bin/Server.o bin/User.o bin/Message.o bin/MessageParser.o bin/PingMessage.o bin/QuitMessage.o bin/JoinMessage.o bin/HumanUser.o bin/ServerUser.o bin/ServerMessage.o bin/PrivateMessage.o bin/HumanMessage.o bin/Command.o bin/CommandHello.o -o bin/garf
 
 Garf.o: src/Garf.cpp src/Garf.h
 	g++ -Wall -c src/Garf.cpp -o bin/Garf.o
@@ -31,6 +31,9 @@ PrivateMessage.o: src/PrivateMessage.h src/PrivateMessage.cpp
 ServerMessage.o: src/ServerMessage.h src/ServerMessage.cpp 
 	g++ -Wall -c src/ServerMessage.cpp -o bin/ServerMessage.o
 
+HumanMessage.o: src/HumanMessage.h src/HumanMessage.cpp
+	g++ -Wall -c src/HumanMessage.cpp -o bin/HumanMessage.o
+
 PingMessage.o: src/PingMessage.h src/PingMessage.cpp
 	g++ -Wall -c src/PingMessage.cpp -o bin/PingMessage.o
 
@@ -42,6 +45,12 @@ JoinMessage.o: src/JoinMessage.h src/JoinMessage.cpp
 
 MessageParser.o: src/MessageParser.cpp src/MessageParser.h
 	g++ -Wall -c src/MessageParser.cpp -o bin/MessageParser.o
+
+Command.o: src/Command.h src/Command.cpp
+	g++ -Wall -c src/Command.cpp -o bin/Command.o
+
+CommandHello.o: src/CommandHello.h src/CommandHello.cpp
+	g++ -Wall -c src/CommandHello.cpp -o bin/CommandHello.o
 
 clean:
 	rm -rf bin/*.o bin/garf

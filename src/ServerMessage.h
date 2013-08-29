@@ -26,8 +26,10 @@
 class ServerMessage : public Message
 {
 	public:
-		ServerMessage(const MessageCommand::Value& _command, const std::string& _data);
+		ServerMessage(const MessageCommand::Value& _command, User* _user, const std::string& _data);
 		virtual ~ServerMessage();
+	private:
+		std::string hostname;
 };
 
 #endif

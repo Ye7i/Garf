@@ -23,10 +23,10 @@
 
 #include "ServerMessage.h"
 
-class PingMessage : ServerMessage
+class PingMessage : public ServerMessage
 {
 	public:
-		PingMessage(const std::string& _data);
+		PingMessage(User* _user, const std::string& _data);
 		~PingMessage();
 };
 

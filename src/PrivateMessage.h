@@ -26,8 +26,12 @@
 class PrivateMessage : public Message
 {
 	public:
-		PrivateMessage(const MessageCommand::Value& _command, const std::string& _data);
+		PrivateMessage(const MessageCommand::Value& _command, User* _user, const std::string& _trailings, const std::string& _data);
 		virtual ~PrivateMessage();
+		
+		const std::string& getTrailings();
+	private:
+		std::string trailings;
 };
 
 #endif

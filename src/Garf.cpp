@@ -1,6 +1,6 @@
 #include "Garf.h"
 
-#include <iostream>cout
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -77,6 +77,7 @@ void Garf::start()
 			case 3:
 					//after 3 recives send data to server (as per IRC protacol)
 					std::cout << user->getNick() << std::endl;
+					sendData("NICK " + user->getNick() + "\r\n");
 					sendData(user->getUsr());
 				break;
 			case 4:

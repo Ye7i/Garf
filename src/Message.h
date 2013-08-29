@@ -49,16 +49,19 @@ namespace MessageCommand
 class Message
 {
 	public:
-		Message(const MessageType::Value& _type, const MessageCommand::Value& _command, const std::string& _data);
+		Message(const MessageType::Value& _type, User* _user, const MessageCommand::Value& _command, const std::string& _data);
 		virtual ~Message();
 
 		const MessageType::Value& getType() const;
+		User* getOriginator();
+		const std::string& getRawContent();
+		const MessageCommand::Value& getCommand();
 		
 		bool compareType(const MessageType::Value& _type);
 	private:
 		MessageType::Value type;
 		std::string rawContent;
-		User originator;
+		User* originator;
 		MessageCommand::Value command;
 };
 

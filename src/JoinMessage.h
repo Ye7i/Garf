@@ -26,7 +26,7 @@
 class JoinMessage : public PrivateMessage
 {
 	public:
-		JoinMessage(const std::string& _data);
+		JoinMessage(User* _user, const std::string& _trailings, const std::string& _data);
 		~JoinMessage();
 };
 

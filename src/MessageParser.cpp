@@ -20,10 +20,6 @@
 
 #include "MessageParser.h"
 
-MessageParser::MessageParser()
-{
-}
-
 MessageParser::MessageParser(const std::string& _message) : message(_message)
 {
 }
@@ -44,9 +40,108 @@ Message* MessageParser::getResult()
 
 Message* MessageParser::parseMessage()
 {
-	Message *msg;
+	// Ugly code, sorry. Tired, and still a noob.
 	
-	// TODO: Everything else
+	bool priv = false;
 	
-	return msg;
+	if (message[0] == ':')
+	{
+		priv = true;
+	}
+	
+	if (priv)
+	{
+		// Grab the position of the closing ":"
+		int endPos = message.find(":", 1);
+		
+		// Find the position of the "!" character, signifying
+		// the end location of the username the message
+		// originated from.
+		int exclPos = message.find("!", 1);
+		
+		if (endPos == -1)
+		{
+			// Getting here means the closing ":" was not found.
+			// The only one we're currently interested in is
+			// the PING command.
+			
+			if (message.substr(0, message.find(" ", 0)) == "PING")
+			{
+				// Looks like we found a PING command.
+				
+				int spacePos = message.find(" ", exclPos);
+			
+				std::string hostname = message.substr(exclPos, spacePos);
+				
+				User *usr = new ServerUser(hostname);
+				
+				Message *msg = new PingMessage(usr, message.substr(message.find(":", 0), message.length()));
+				return msg;
+			}
+			
+			return 0;
+		}
+		
+		if (exclPos > endPos)
+		{
+			// Getting here means that there was a "!" somewhere in
+			// the user message, but not within the actual server
+			// command message body. We may as well treat this as
+			// a non-human message.
+			
+			exclPos = -1;
+		}
+		
+		if (exclPos == -1)
+		{
+			// Getting here means that it's not a direct private message.
+			// It's probably some sort of server message, like MODE,
+			// or the /NAMES list.
+			// At this time we don't care about those, so return null.
+			
+			return 0;
+		} else {
+			// Getting here means that it's a direct private message.
+			// It could be one of three things:
+			//		- Channel message
+			//		- Private message from a human
+			// 		- Server message
+			
+			std::string nickname = message.substr(1, exclPos);
+			
+			int spacePos = message.find(" ", exclPos);
+			
+			std::string hostname = message.substr(exclPos, spacePos);
+			
+			int spacePosTwo = message.find(" ", spacePos);
+			
+			std::string command = message.substr(spacePos, spacePosTwo);
+			
+			int spacePosThree = message.find(" ", spacePosTwo);
+			
+			std::string origin = message.substr(spacePosTwo, spacePosThree);
+			
+			std::string trailingMessage = message.substr(endPos, message.length());
+			
+			Message *msg;
+
+			User *usr = new HumanUser(nickname, "", hostname);
+
+			if (command == "PRIVMSG")
+			{
+				msg = new HumanMessage(usr, trailingMessage, message);
+			} else if (command == "QUIT")
+			{
+				msg = new QuitMessage(usr, trailingMessage, message);
+			} else if (command == "JOIN")
+			{
+				msg = new JoinMessage(usr, trailingMessage, message);
+			}
+
+			return msg;
+			
+		}
+	}
+	
+	return 0;
 }

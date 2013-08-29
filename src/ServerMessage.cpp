@@ -20,7 +20,7 @@
 
 #include "ServerMessage.h"
 
-ServerMessage::ServerMessage(const MessageCommand::Value& _command, const std::string& _data) : Message(MessageType::SERVER, _command, _data)
+ServerMessage::ServerMessage(const MessageCommand::Value& _command, User* _user, const std::string& _data) : Message(MessageType::SERVER, _user, _command, _data)
 {
 }
 

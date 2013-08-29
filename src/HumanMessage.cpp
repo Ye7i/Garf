@@ -18,21 +18,12 @@
     Contact me(the founding developer) at:
     fallenby@outlook.com */
 
-#ifndef COMMAND_H
-#define COMMAND_H
+#include "HumanMessage.h"
 
-#include "Message.h"
-
-class Command
+HumanMessage::HumanMessage(User* _user, const std::string& _trailings, const std::string& _data) : PrivateMessage(MessageCommand::PRIVMSG, _user, _trailings, _data)
 {
-	public:
-		Command(const std::string& _name, Message* _message);
-		virtual ~Command();
-		
-		virtual Message* execute() = 0;
-	private:
-		std::string name;
-		Message* message;
-};
+}
 
-#endif
+HumanMessage::~HumanMessage()
+{
+}

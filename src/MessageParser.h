@@ -21,12 +21,19 @@
 #ifndef MESSAGE_PARSER_H
 #define MESSAGE_PARSER_H
 
+#include <string>
+
 #include "Message.h"
+#include "JoinMessage.h"
+#include "QuitMessage.h"
+#include "HumanMessage.h"
+#include "HumanUser.h"
+#include "PingMessage.h"
+#include "ServerUser.h"
 
 class MessageParser
 {
 	public:
-		MessageParser();
 		MessageParser(const std::string& _message);
 		virtual ~MessageParser();
 		

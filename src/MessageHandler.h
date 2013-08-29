@@ -18,21 +18,27 @@
     Contact me(the founding developer) at:
     fallenby@outlook.com */
 
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef MESSAGE_HANDLER_H
+#define MESSAGE_HANDLER_H
 
 #include "Message.h"
+#include "MessageParser.h"
 
-class Command
+#include <string>
+
+class MessageHandler
 {
 	public:
-		Command(const std::string& _name, Message* _message);
-		virtual ~Command();
-		
-		virtual Message* execute() = 0;
-	private:
-		std::string name;
-		Message* message;
+        static MessageHandler* getInstance();
+        virtual ~MessageHandler();
+        
+        void handle(const std::string& _msg);
+    private:
+        MessageHandler();
+        MessageHandler(MessageHandler const&);
+        void operator=(MessageHandler const&);
+        
+        static MessageHandler* instance;
 };
 
 #endif

@@ -20,7 +20,7 @@
 
 #include "Message.h"
 
-Message::Message(const MessageType::Value& _type, const MessageCommand::Value& _command, const std::string& _data) : type(_type), rawContent(_data), command(_command)
+Message::Message(const MessageType::Value& _type, User* _user, const MessageCommand::Value& _command, const std::string& _data) : type(_type), rawContent(_data), command(_command), originator(_user)
 {
 }
 
@@ -31,6 +31,21 @@ Message::~Message()
 const MessageType::Value& Message::getType() const
 {
 	return type;
+}
+
+User* Message::getOriginator()
+{
+	return originator;
+}
+
+const std::string& Message::getRawContent()
+{
+	return rawContent;
+}
+
+const MessageCommand::Value& Message::getCommand()
+{
+	return command;
 }
 
 bool Message::compareType(const MessageType::Value& _type)

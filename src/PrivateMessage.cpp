@@ -20,10 +20,15 @@
 
 #include "PrivateMessage.h"
 
-PrivateMessage::PrivateMessage(const MessageCommand::Value& _command, const std::string& _data) : Message(MessageType::PRIVATE, _command, _data)
+PrivateMessage::PrivateMessage(const MessageCommand::Value& _command, User* _user, const std::string& _trailings, const std::string& _data) : Message(MessageType::PRIVATE, _user, _command, _data), trailings(_trailings)
 {
 }
 
 PrivateMessage::~PrivateMessage()
 {
+}
+
+const std::string& PrivateMessage::getTrailings()
+{
+	return trailings;
 }

@@ -20,7 +20,7 @@
 
 #include "QuitMessage.h"
 
-QuitMessage::QuitMessage(const std::string& _data) : PrivateMessage(MessageCommand::QUIT, _data)
+QuitMessage::QuitMessage(User* _user, const std::string& _trailings,const std::string& _data) : PrivateMessage(MessageCommand::QUIT, _user, _trailings, _data)
 {
 }
 

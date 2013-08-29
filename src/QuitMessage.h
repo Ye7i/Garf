@@ -26,7 +26,7 @@
 class QuitMessage : public PrivateMessage
 {
 	public:
-		QuitMessage(const std::string& _data);
+		QuitMessage(User* _user, const std::string& _trailings, const std::string& _data);
 		~QuitMessage();
 };
 

@@ -20,7 +20,7 @@
 
 #include "JoinMessage.h"
 
-JoinMessage::JoinMessage(const std::string& _data) : PrivateMessage(MessageCommand::JOIN, _data)
+JoinMessage::JoinMessage(User* _user, const std::string& _trailings, const std::string& _data) : PrivateMessage(MessageCommand::JOIN, _user, _trailings, _data)
 {
 }
 
