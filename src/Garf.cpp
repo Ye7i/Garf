@@ -1,6 +1,6 @@
 #include "Garf.h"
 
-#include <iostream>
+#include <iostream>cout
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -76,7 +76,7 @@ void Garf::start()
 		switch (count) {
 			case 3:
 					//after 3 recives send data to server (as per IRC protacol)
-					cout << user->getNick() << endl;
+					std::cout << user->getNick() << std::endl;
 					sendData(user->getUsr());
 				break;
 			case 4:
