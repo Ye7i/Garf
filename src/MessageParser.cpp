@@ -44,5 +44,9 @@ Message* MessageParser::getResult()
 
 Message* MessageParser::parseMessage()
 {
+	Message *msg;
 	
+	// TODO: Everything else
+	
+	return msg;
 }
