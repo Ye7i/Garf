@@ -12,9 +12,9 @@ class MessageParser
 		
 		void setMessage(const std::string& _message);
 		
-		const Message& getResult();
+		Message* getResult();
 	private:
-		const Message& parseMessage();
+		Message* parseMessage();
 	
 		std::string message;
 };

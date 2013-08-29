@@ -11,7 +11,7 @@ class Channel
 		Channel(const std::string& _name);
 		virtual ~Channel();
 		
-		std::string getName() const;
+		const std::string& getName() const;
 	private:
 		std::string name;
 };

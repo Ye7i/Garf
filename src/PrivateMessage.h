@@ -6,7 +6,7 @@
 class PrivateMessage : public Message
 {
 	public:
-		PrivateMessage(const std::string& _data);
+		PrivateMessage(const MessageCommand::Value& _command, const std::string& _data);
 		virtual ~PrivateMessage();
 };
 

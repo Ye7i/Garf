@@ -17,12 +17,12 @@ void MessageParser::setMessage(const std::string& _message)
 	message = _message;
 }
 
-const Message& MessageParser::getResult()
+Message* MessageParser::getResult()
 {
 	return parseMessage();
 }
 
-const Message& MessageParser::parseMessage()
+Message* MessageParser::parseMessage()
 {
 	
 }

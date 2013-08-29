@@ -14,7 +14,7 @@
 #include <signal.h>
 #include <time.h>
 
-Garf::Garf(const HumanUser& _user, const Server& _server, const ChannelList& _channelList)
+Garf::Garf(HumanUser* _user, Server* _server, ChannelList* _channelList)
 {
 	user = _user;
 	server = _server;
@@ -42,7 +42,7 @@ void Garf::start()
 
 	//Setup the structs if error print why
 	int res;
-	if ((res = getaddrinfo(server.getAddr().c_str(), server.getPort().c_str(), &hints, &servinfo)) != 0)
+	if ((res = getaddrinfo(server->getAddr().c_str(), server->getPort().c_str(), &hints, &servinfo)) != 0)
 	{
 		setup = false;
 		fprintf(stderr,"getaddrinfo: %s\n", gai_strerror(res));
@@ -65,7 +65,7 @@ void Garf::start()
 
 	//Recv some data
 	int numbytes;
-	char buf[server.getMaxBufSize()];
+	char buf[server->getMaxBufSize()];
 
 	int count = 0;
 	while (1)
@@ -76,21 +76,20 @@ void Garf::start()
 		switch (count) {
 			case 3:
 					//after 3 recives send data to server (as per IRC protacol)
-					cout << user.getNick() << endl;
-					sendData("NICK " + user.getNick() + "\r\n");
-					sendData(user.getUsr());
+					cout << user->getNick() << endl;
+					sendData(user->getUsr());
 				break;
 			case 4:
-					for (int i = 0; i < channelList.size(); ++i)
+					for (int i = 0; i < channelList->size(); ++i)
 					{
-						joinChannel(channelList.getChannel(i));
+						joinChannel(channelList->getChannel(i));
 					}
 			default:
 				break;
 		}
 
 		//Recv & print Data
-		numbytes = recv(socketDescriptor,buf,server.getMaxBufSize()-1,0);
+		numbytes = recv(socketDescriptor,buf,server->getMaxBufSize()-1,0);
 		buf[numbytes]='\0';
 		std::cout << buf;
 		//buf is the data that is recived
@@ -219,13 +218,13 @@ void Garf::sendPong(const std::string& buf)
 
 void Garf::msgHandel(const std::string& buf)
 {
-	if (charSearch(buf, "!" + user.getNick()))
+	if (charSearch(buf, "!" + user->getNick()))
 	{
 		sendData("PRIVMSG #test :!garf\r\n");
 	}
 }
 
-void Garf::joinChannel(const Channel& _channel)
+void Garf::joinChannel(Channel* _channel)
 {
-	sendData("JOIN " + _channel.getName() + "\r\n");
+	sendData("JOIN " + _channel->getName() + "\r\n");
 }

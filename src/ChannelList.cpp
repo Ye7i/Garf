@@ -10,7 +10,7 @@ ChannelList::~ChannelList()
 {
 }
 
-void ChannelList::addChannel(const Channel& _channel)
+void ChannelList::addChannel(Channel* _channel)
 {
 	// Prevent adding duplicate channels.
 	// There's no use for that, really. We're using the same nickname for each instance.
@@ -20,9 +20,9 @@ void ChannelList::addChannel(const Channel& _channel)
 	}
 }
 
-void ChannelList::removeChannel(const Channel& _channel)
+void ChannelList::removeChannel(Channel* _channel)
 {
-	int index = getChannelIndex(_channel.getName());
+	int index = getChannelIndex(_channel->getName());
 	if (index != -1)
 	{
 		channels.erase(channels.begin() + getChannelIndex(_channel));
@@ -42,7 +42,7 @@ bool ChannelList::channelExists(const std::string& _channelName) const
 {
 	for (int i = 0; i < size(); ++i)
 	{
-		if (channels[i].getName() == _channelName)
+		if (channels[i]->getName() == _channelName)
 		{
 			return true;
 		}
@@ -50,16 +50,16 @@ bool ChannelList::channelExists(const std::string& _channelName) const
 	return false;
 }
 
-bool ChannelList::channelExists(const Channel& _channel) const
+bool ChannelList::channelExists(Channel* _channel) const
 {
-	return channelExists(_channel.getName());
+	return channelExists(_channel->getName());
 }
 
 int ChannelList::getChannelIndex(const std::string& _channelName) const
 {
 	for (int i = 0; i < size(); ++i)
 	{
-		if (channels[i].getName() == _channelName)
+		if (channels[i]->getName() == _channelName)
 		{
 			return i;
 		}
@@ -67,12 +67,12 @@ int ChannelList::getChannelIndex(const std::string& _channelName) const
 	return -1;
 }
 
-int ChannelList::getChannelIndex(const Channel& _channel) const
+int ChannelList::getChannelIndex(Channel* _channel) const
 {
-	return getChannelIndex(_channel.getName());
+	return getChannelIndex(_channel->getName());
 }
 
-const Channel& ChannelList::getChannel(int _index) const
+Channel* ChannelList::getChannel(int _index) const
 {
 	if (_index < size())
 	{

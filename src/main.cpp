@@ -22,17 +22,23 @@ using namespace std;
 
 int main()
 {
-	ChannelList list;
-	Channel chan("#test");
-	list.addChannel(chan);
-	Channel chan2("#test2");
-	list.addChannel(chan2);
+	ChannelList *list = new ChannelList();
+	Channel *chan = new Channel("#test");
+	list->addChannel(chan);
+	Channel *chan2 = new Channel("#test2");
+	list->addChannel(chan2);
 	
-	Server server("127.0.0.1", "6667", 100);
-	HumanUser user("garf", "USER guest tolmoon tolsun :Ronnie Reagan\r\n");
+	Server *server = new Server("127.0.0.1", "6667", 100);
+	HumanUser *user = new HumanUser("garf", "USER guest tolmoon tolsun :Ronnie Reagan\r\n");
 	
 	Garf garf = Garf(user, server, list);
 	garf.start();
+	
+	delete list;
+	delete chan;
+	delete chan2;
+	delete server;
+	delete user;
 	
 	return 0;
 }

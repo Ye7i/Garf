@@ -9,7 +9,7 @@ Channel::~Channel()
 {
 }
 
-std::string Channel::getName() const
+const std::string& Channel::getName() const
 {
 	return name;
 }

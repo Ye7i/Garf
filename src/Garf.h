@@ -12,7 +12,7 @@
 class Garf
 {
 	public:
-		Garf(const HumanUser& _user, const Server& _server, const ChannelList& _channelList);
+		Garf(HumanUser* _user, Server* _server, ChannelList* _channelList);
 		
 		virtual ~Garf();
 
@@ -20,14 +20,14 @@ class Garf
 
 		void start();
 
-		void joinChannel(const Channel& _channel);
+		void joinChannel(Channel* _channel);
 
 	private:
 		int socketDescriptor;
 
-		HumanUser user;
-		Server server;
-		ChannelList channelList;
+		HumanUser* user;
+		Server* server;
+		ChannelList* channelList;
 
 		bool isConnected(std::string buf);
 

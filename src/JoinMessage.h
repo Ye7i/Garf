@@ -1,9 +1,9 @@
 #ifndef JOIN_MESSAGE_H
 #define JOIN_MESSAGE_H
 
-#include "ServerMessage.h"
+#include "PrivateMessage.h"
 
-class JoinMessage : public ServerMessage
+class JoinMessage : public PrivateMessage
 {
 	public:
 		JoinMessage(const std::string& _data);

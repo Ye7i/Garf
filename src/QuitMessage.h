@@ -1,9 +1,9 @@
 #ifndef QUIT_MESSAGE_H
 #define QUIT_MESSAGE_H
 
-#include "ServerMessage.h"
+#include "PrivateMessage.h"
 
-class QuitMessage : public ServerMessage
+class QuitMessage : public PrivateMessage
 {
 	public:
 		QuitMessage(const std::string& _data);
